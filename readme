@@ -1,0 +1,55 @@
+# Pong DQN 强化学习项目
+
+基于DQN算法的Pong游戏强化学习实现。
+
+## 文件说明
+
+- `pong_env.py` - Pong游戏的强化学习环境（基于Gymnasium接口）
+- `pong_dqn_training.py` - DQN训练脚本
+- `pong_dqn_test.py` - DQN测试脚本
+
+## 安装依赖
+
+```bash
+pip install numpy torch gymnasium matplotlib pandas pygame
+```
+
+## 环境特性
+
+### 状态空间
+状态由4个离散值组成：
+- 球的X坐标（离散化）
+- 球的Y坐标（离散化）
+- 板子底部位置（离散化）
+- 板子顶部位置（离散化）
+
+默认使用`grid_size=20`进行离散化：
+- 总状态数约：**442,368个状态**
+- 球X维度：32个离散值
+- 球Y维度：24个离散值
+- 板子位置维度：24个离散值
+
+### 动作空间
+3个离散动作：
+- `0` - 不移动
+- `1` - 向上移动
+- `2` - 向下移动
+
+### 奖励设计
+- 成功接到球：`+1.0`
+- 未接到球（失败）：`-1.0`
+- 其他情况：`0.0`
+
+## 使用方法
+
+# 1. 训练模型
+python pong_dqn_training.py
+
+# 2. 测试模型（不渲染）
+python pong_dqn_test.py --model pong_dqn_seed_0.pth --episodes 20
+
+# 3. 可视化测试
+python pong_dqn_test.py --model pong_dqn_seed_0.pth --episodes 5 --render
+
+# 4. 交互式调试
+python pong_dqn_test.py --model pong_dqn_seed_0.pth --interactive
